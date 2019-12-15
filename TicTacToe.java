@@ -8,11 +8,6 @@ public class TicTacToe
    public static void main(String[] args)
    {
       TTTGame game = new TTTGame();
-      while(!game.getGameOver())
-      {
-         if(game.getReset())
-            game = new TTTGame();
-      }
    }
 }
 
@@ -57,8 +52,7 @@ class TTTGame extends JFrame
       bottomPanel = new JPanel();
       bottomPanel.setSize(200, 400);
       bottomPanel.setLayout(new FlowLayout());
-      /*unfinished reset button. problem switching from X to O when playing against the bot */
-//       bottomPanel.add(resetButton); 
+      bottomPanel.add(resetButton); 
       
       if(debug)
       {
@@ -95,30 +89,6 @@ class TTTGame extends JFrame
       
       setUpBot();
       
-      // int choice = JOptionPane.showConfirmDialog(null, "Do you want to play against the Computer");
-//       
-//       if(choice == JOptionPane.YES_OPTION)
-//       {
-//          bot = true;
-//          int xChoice = JOptionPane.showConfirmDialog(null, "Do you want to be X");
-//          if(xChoice == JOptionPane.YES_OPTION)
-//             botIsX = false;
-//          else
-//             botIsX = true;
-// //          botIsX = rand.nextBoolean();
-//          String message = "Playing against the Computer good luck!";
-//          if(botIsX)
-//             message += " The Computer is X";
-//          else
-//             message += " The Computer is O";
-//          JOptionPane.showMessageDialog(null, message);
-//          initBot();
-//       }
-//       else
-//       {
-//          bot = false;
-//          JOptionPane.showMessageDialog(null, "2-Player mode. Have fun!");
-//       }
    }
    
    private void setUpBot()
@@ -330,6 +300,8 @@ class TTTGame extends JFrame
    //the brains of the bot
    private void botTurn()
    {
+      System.out.println("DEBUG: XTURN: " + xTurn  + 
+                         "\nDEBUG: BOTISX: " + botIsX);
       int counter = 1;
       char botId; char humId;
       boolean spotFound;
@@ -768,7 +740,7 @@ class TTTGame extends JFrame
       
       add(board, BorderLayout.CENTER);
       setVisible(true);
-      if(bot)
+      if(bot && !reset)
          initBot();
    }
    
